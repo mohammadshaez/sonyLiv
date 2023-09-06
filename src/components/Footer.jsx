@@ -1,8 +1,5 @@
 // import { styled } from "styled-components";
 import { mobile, tablet, large } from "../helper/responsiveHelper";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -19,6 +16,7 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 
 const Container = styled.div`
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   color: white;
@@ -64,8 +62,8 @@ const UsefulLinksContainer = styled.div`
   padding: 25px 40px;
 `;
 const StyledLink = styled.a`
-cursor: pointer;
-text-decoration: none;
+  cursor: pointer;
+  text-decoration: none;
   &:not(:last-of-type)::after {
     content: " • ";
   }
@@ -274,7 +272,7 @@ const SmallDevice = () => {
 
 const LargeContainer = styled.div`
   color: white;
-
+  margin-top: 50px;
   ${large({})}
   ${tablet({})}
   ${mobile({})}
@@ -286,9 +284,9 @@ const LinkCategoriesWrapper = styled.div`
   flex-wrap: wrap;
 `;
 const BottomWrapper = styled.div`
-    display: flex;
-    justify-content: space-around;
-`
+  display: flex;
+  justify-content: space-around;
+`;
 const InfoContainer = styled.div`
   text-align: center;
   width: 15%;
@@ -318,11 +316,7 @@ const Link = styled.div`
   ${tablet({})}
   ${mobile({})}
 `;
-// const Container = styled.div`
-//   ${large({})}
-//   ${tablet({})}
-//   ${mobile({})}
-// `;
+
 const LargeDevice = () => {
   return (
     <>
@@ -381,7 +375,6 @@ const LargeDevice = () => {
           </InfoContainer>
         </LinkCategoriesWrapper>
         <BottomWrapper>
-
           {/* Useful Links */}
           <UsefulLinksContainer>
             <StyledLink>Terms Of Use</StyledLink>
@@ -394,7 +387,7 @@ const LargeDevice = () => {
               <p>© 2022 Sony Pictures Networks India Pvt. Ltd.</p>
             </CopyrightContainer>
           </UsefulLinksContainer>
-          
+
           {/* App Download */}
           <MobileStoreContainer>
             <MobileAppImage src="src/assets/App_Download/playStore.png" />
@@ -413,7 +406,6 @@ const LargeDevice = () => {
               <TwitterIcon sx={{ fontSize: "2.5rem" }} />
             </IconContainer>
           </SocialContainer>
-
         </BottomWrapper>
       </LargeContainer>
     </>

@@ -5,14 +5,22 @@ import { theme } from "./helper/theme";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import Registration from "./pages/Registration";
+import { useSelector } from "react-redux";
+import Login from "./pages/Login";
 
 function App() {
+  const token = useSelector((state) => state.user.userToken);
   return (
     <>
       <ThemeProvider theme={theme}>
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route path="/register" element={<Registration />} />
+          {/* {token ? ( */}
+            <Route path="/login" element={<Login />} />
+          {/* ) : ( */}
+            <Route path="/register" element={<Registration />} />
+          {/* )} */}
+
           <Route path="/about" element={<About />} />
         </Routes>
       </ThemeProvider>

@@ -106,7 +106,7 @@ const TodaysHotPick = () => {
           >
             {TodaysHotPickData.map((item) => (
               <Card
-                sx={{ maxWidth: 345, borderRadius: 2, width: "180px", "&:first-child": { marginLeft: "50px" } }}
+                sx={{ maxWidth: 345, borderRadius: 2, width: "180px", "&:first-of-type": { marginLeft: "50px" } }}
                 raised
                 key={item.id}
               >

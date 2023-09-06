@@ -3,9 +3,9 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import {mobile, tablet, large} from '../helper/responsiveHelper';
+import { mobile, tablet, large } from "../helper/responsiveHelper";
 
 const Container = styled.div`
   /* width: 100%; */
@@ -38,7 +38,8 @@ const CardContainer = styled.div`
   gap: 15px;
   cursor: pointer;
   /* overflow-x: scroll; */
-  .MuiCard-root:hover, .MuiCard-root:focus  {
+  .MuiCard-root:hover,
+  .MuiCard-root:focus {
     transform: scale(1.1); /* Scale up the card on hover */
     transition: transform 0.5s ease-in-out;
     & > .scroll-button {
@@ -71,53 +72,69 @@ const RightButton = styled(Button)`
 const TvShows = () => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-    // console.log("data",data)
-    
-    const handleScroll = (direction) => {
-        const container = document.getElementById("card-scroll-container");
-        const cardWidth = 180; // Width of a card (adjust as needed)
-        const cardsInView = Math.floor(container.clientWidth / cardWidth);
-        const scrollAmount = cardWidth * cardsInView;
-        console.log(container.clientWidth)
-        if (direction === "left") {
-          setScrollLeft((prevScrollLeft) =>
-            prevScrollLeft - scrollAmount <= 0 ? 0 : prevScrollLeft - scrollAmount
-          );
-        } else {
-          setScrollLeft((prevScrollLeft) =>
-            prevScrollLeft + scrollAmount >= container.scrollWidth
-              ? container.clientWidth
-              : prevScrollLeft + scrollAmount
-          );
-        }
-      };
+  // console.log("data",data)
+  const [pageNumber, setPageNumber] = useState(1);
+  const [hasMore, setHasMore] = useState(true); // Add a flag to track if there's more data to load
+  const containerRef = useRef(null);
+  console.log(data);
+
+  const handleScroll = (direction) => {
+    const container = document.getElementById("card-scroll-container");
+    const cardWidth = 180;
+    const cardsInView = Math.floor(container.clientWidth / cardWidth);
+    const scrollAmount = cardWidth * cardsInView;
+
+    if (direction === "left") {
+      const container = containerRef.current;
+      const cardWidth = container.querySelector(".card").offsetWidth;
+      setScrollLeft(scrollLeft - cardWidth * 5);
+    } else {
+      const container = containerRef.current;
+      const cardWidth = container.querySelector(".card").offsetWidth;
+      console.log(cardWidth);
+      setScrollLeft(scrollLeft + cardWidth * 5);
+      setPageNumber((prevPage) => prevPage + 1);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-        try {
-          const config = {
-            headers: {
-              "projectId": "9m8ybce3f4vg",
-            },
-          };
+      try {
+        const config = {
+          headers: {
+            projectId: "9m8ybce3f4vg",
+          },
+        };
         const response = await axios.get(
-          "https://academics.newtonschool.co/api/v1/ott/show?page=2&limit=15", config
+          `https://academics.newtonschool.co/api/v1/ott/show?page=${pageNumber}&limit=15`,
+          config
         );
-        // console.log("response",response.data)
-        setData(response.data);
+
+        if (response.data.data.length === 0) {
+          setHasMore(false);
+        }
+        setData((prevData) => [...prevData, ...response.data.data]);
       } catch (error) {
-        // console.log("error",error)
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
       }
     };
-    fetchData();
-  }, []);
+
+    if (hasMore) {
+      fetchData();
+    }
+  }, [pageNumber, hasMore]);
+
   return (
     <>
       <Container>
         <Title>Popular TV Shows</Title>
+
+        {/* Button */}
         <LeftButton
           onClick={() => handleScroll("left")}
           onMouseOver={() => setIsHovered(true)}
@@ -126,8 +143,11 @@ const TvShows = () => {
         >
           <ArrowBackIcon sx={{ color: "white", fontSize: "30px" }} />
         </LeftButton>
-        <CardScrollContainer >
+
+        {/* Card */}
+        <CardScrollContainer>
           <CardContainer
+            ref={containerRef}
             style={{
               transform: `translateX(-${scrollLeft}px)`,
               transition: "all 0.5s ease",
@@ -136,20 +156,21 @@ const TvShows = () => {
             onMouseLeave={() => setIsHovered(false)}
             id="card-scroll-container"
           >
-            {data.data?.map((item) => (
+            {data.map((item) => (
               <Card
                 sx={{
                   maxWidth: 345,
                   borderRadius: 2,
                   width: "180px",
-                  "&:first-child": { marginLeft: "50px" },
+                  "&:first-of-type": { marginLeft: "50px" },
                 }}
                 raised
-                key={item.id}
+                key={item._id}
+                className="card"
               >
                 <CardMedia
                   component="img"
-                  alt="green iguana"
+                  alt={item.title}
                   height="280"
                   image={item.thumbnail}
                   sx={{ objectFit: "cover" }}
@@ -158,6 +179,8 @@ const TvShows = () => {
             ))}
           </CardContainer>
         </CardScrollContainer>
+
+        {/* Button */}
         <RightButton
           onClick={() => handleScroll("right")}
           onMouseOver={() => setIsHovered(true)}

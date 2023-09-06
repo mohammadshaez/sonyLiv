@@ -52,10 +52,13 @@ const Arrow = styled.div`
   bottom: 0;
   margin: auto;
   z-index: 2;
-  height: 50px;
+  cursor: pointer;
   width: 50px;
-  border-radius: 50%;
-  background-color: white;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50px;
+  transition: opacity 0.3s ease;
   opacity: 0.5;
   display: flex;
   justify-content: center;
@@ -174,11 +177,11 @@ const Slider = () => {
     >
 
       <LeftArrow onClick={() => handleClick("left")}>
-        <ArrowBackIosIcon />
+        <ArrowBackIosIcon sx={{ color: "white", fontSize: "20px" }} />
       </LeftArrow>
       <Wrapper>
         {sliderData.map((item) => (
-          <Container sliderindex={sliderindex}>
+          <Container sliderindex={sliderindex} key={item.id}>
             <ImageContainer>
               <HeroImage src={item.imageURL} />
             </ImageContainer>
@@ -209,7 +212,7 @@ const Slider = () => {
       </Wrapper>
 
       <RightArrow onClick={() => handleClick("right")}>
-        <ArrowForwardIosIcon />
+        <ArrowForwardIosIcon sx={{ color: "white", fontSize: "20px" }} />
       </RightArrow>
 
       </div>

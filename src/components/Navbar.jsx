@@ -177,7 +177,9 @@ const Navbar = () => {
         <Blur />
         <Left>
           <LogoWrapper>
-            <Logo src="https://images.slivcdn.com/UI_icons/sonyliv_new_revised_header_logo.png?w=40&q=high&fr=webp" />
+            <Link to="/">
+              <Logo src="https://images.slivcdn.com/UI_icons/sonyliv_new_revised_header_logo.png?w=40&q=high&fr=webp" />
+            </Link>
           </LogoWrapper>
           <SubscribeButton>
             Subscribe
@@ -221,7 +223,7 @@ const Navbar = () => {
               }}
             />
             <UserDropdownContainer>
-              <UserDropdownContent to="/register">
+              <UserDropdownContent to="/login">
                 <img
                   src="src/assets/Misc/UserDropdownSignin.png"
                   alt="sign in avatar"
