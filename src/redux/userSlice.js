@@ -5,6 +5,7 @@ const initialState = {
   userToken: "",
   isFetching: false,
   error: false,
+  watchlist: []
 };
 
 export const userSlice = createSlice({
@@ -17,6 +18,8 @@ export const userSlice = createSlice({
     loginStart: (state) => {
       state.isFetching = true;
       state.error = false;
+      state.currentUser = null;
+      console.log(state.watchlist)
     },
     loginSuccess: (state, action) => {
       state.isFetching = false;

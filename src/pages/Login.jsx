@@ -91,33 +91,33 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { error, userToken } = useSelector((state) => state.user);
+  const { error, userToken, currentUser } = useSelector((state) => state.user);
   const handleClick = async (e) => {
-    console.log(error, userToken);
-    e.preventDefault();
-    const userData = {
-      email,
-      password,
-      appType: "ott",
-    };
-    try {
+      e.preventDefault();
+      const userData = {
+          email,
+          password,
+          appType: "ott",
+        };
+        try {
       const config = {
         headers: {
           Authorization: `Bearer ${userToken}`,
           projectId: "9m8ybce3f4vg",
         },
-      };
-      dispatch(loginStart());
-      const response = await axios.post(
+    };
+    dispatch(loginStart());
+    const response = await axios.post(
         "https://academics.newtonschool.co/api/v1/user/login",
         userData,
         config
-      );
-      console.log(response.data);
-      if (response.status == "success") {
+        );
+        console.log(response); 
+        if (response.data.status == "success") {
+            navigate("/");
+        }
         dispatch(loginSuccess(response.data));
-      }
-      navigate("/");
+        console.log(error, userToken, currentUser);
     } catch (error) {
       console.log(error);
       dispatch(loginFailed());

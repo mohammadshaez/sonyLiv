@@ -208,7 +208,7 @@ const Registration = () => {
               id="fileInput"
               accept=".jpg, .jpeg, .png, .gif"
               placeholder="Username"
-              value={userDetails.username}
+              value={userDetails.file}
               onChange={(e) =>
                 setUserDetails((prevUserDetails) => ({
                   ...prevUserDetails,

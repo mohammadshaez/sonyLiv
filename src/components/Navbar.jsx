@@ -10,6 +10,7 @@ import ContactsIcon from "@mui/icons-material/Contacts";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PercentIcon from "@mui/icons-material/Percent";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.header`
   display: flex;
@@ -145,7 +146,7 @@ const AccountBoxIconContainer = styled.div`
   cursor: pointer;
 
   &:hover ${UserDropdownContainer} {
-    display: block; /* Show UserDropdownContainer on hover */
+    display: block;
   }
 `;
 const UserDropdownContent = styled(Link)`
@@ -161,7 +162,7 @@ const UserDropdownContent = styled(Link)`
     color: #0a0a0a;
     background-color: lightgray;
     & p {
-      transform: translateX(10px);
+      transform: translateX(5px);
     }
   }
   & p {
@@ -169,8 +170,14 @@ const UserDropdownContent = styled(Link)`
     margin-left: 10px;
   }
 `;
-
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
 const Navbar = () => {
+  const user = useSelector((state) => state.user.currentUser);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0); // Scroll to the top when the component mounts
+  // }, []);
   return (
     <>
       <Wrapper>
@@ -217,8 +224,7 @@ const Navbar = () => {
                 color: "lightgray",
                 fontWeight: "light",
                 cursor: "pointer",
-                padding: "0 10px",
-                height: "100%",
+                padding: "10px 10px",
                 // border: "1px solid white"
               }}
             />
@@ -228,19 +234,26 @@ const Navbar = () => {
                   src="src/assets/Misc/UserDropdownSignin.png"
                   alt="sign in avatar"
                 />
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <p>Sign in</p>
-                  <p>a better experience</p>
-                </div>
+                {user ? (
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <p>Welcome, {user.name}</p>
+                  </div>
+                ) : (
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <p>Sign in</p>
+                    <p>a better experience</p>
+                  </div>
+                )}
               </UserDropdownContent>
               <UserDropdownContent>
                 <SubscriptionsIcon />
                 <p>Subscribe Now</p>
               </UserDropdownContent>
-              <UserDropdownContent>
+              <UserDropdownContent to="/mylist">
                 <LiveTvIcon />
-                <p>Activate TV</p>
+                <p>My Watchlist</p>
               </UserDropdownContent>
+
               <UserDropdownContent>
                 <SettingsIcon />
                 <p>Settings & Preferences</p>

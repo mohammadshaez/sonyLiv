@@ -20,6 +20,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   color: white;
+  background-color: #111111;
 `;
 
 //Mui Accordian

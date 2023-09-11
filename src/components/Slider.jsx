@@ -187,11 +187,11 @@ const Slider = () => {
             </ImageContainer>
             <DetailsWrapper>
               <UpperWrapper>
-                <Details>{item.details} </Details>
+                <Details> {item.details} </Details>
                 <Dot>•</Dot>
-                <Language>{item.language} </Language>
+                <Language> {item.language} </Language>
                 <Dot>•</Dot>
-                <Year> {item.releaseYear}</Year>
+                <Year>{item.releaseYear} </Year>
               </UpperWrapper>
               <BottomWrapper>
                 <Left>

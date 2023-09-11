@@ -75,7 +75,7 @@ const StyledLink = styled(Link)`
 `;
 
 // All TV Shows - - unfiltered
-const TvShows = () => {
+const FilteredShowList = ({ category }) => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [data, setData] = useState([]);
@@ -83,62 +83,76 @@ const TvShows = () => {
   const [isLoading, setIsLoading] = useState(false);
   // console.log("data",data)
   const [pageNumber, setPageNumber] = useState(1);
-  const [hasMore, setHasMore] = useState(true); // Add a flag to track if there's more data to load
+  // const [hasMore, setHasMore] = useState(true);
   const containerRef = useRef(null);
-  // console.log(data);
 
+  // console.log(data);
+  // const filtered = data.filter((item) => item.keywords.includes(category));
+  // console.log(filtered.length);
+  console.log(data.length, pageNumber)
+  // const handleDataCompletion = () => {
+  //   if (data.length > 0 && data.length <= 10) {
+  //   }
+  // };
   const handleScroll = (direction) => {
-    const container = document.getElementById("card-scroll-container");
-    const cardWidth = 180;
-    const cardsInView = Math.floor(container.clientWidth / cardWidth);
-    const scrollAmount = cardWidth * cardsInView;
+    // const container = document.getElementById("card-scroll-container");
+    // const cardWidth = 180;
+    // const cardsInView = Math.floor(container.clientWidth / cardWidth);
+    // const scrollAmount = cardWidth * cardsInView;
 
     if (direction === "left") {
       const container = containerRef.current;
+      // console.log(container);
       const cardWidth = container.querySelector(".card").offsetWidth;
       setScrollLeft(scrollLeft - cardWidth * 5);
     } else {
       const container = containerRef.current;
+      // console.log(container.offsetWidth);
       const cardWidth = container.querySelector(".card").offsetWidth;
       // console.log(cardWidth);
       setScrollLeft(scrollLeft + cardWidth * 5);
-      setPageNumber((prevPage) => prevPage + 1);
+      fetchData();
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const config = {
-          headers: {
-            projectId: "9m8ybce3f4vg",
-          },
-        };
-        const response = await axios.get(
-          `https://academics.newtonschool.co/api/v1/ott/show?page=${pageNumber}&limit=15`,
-          config
-        );
-        // console.log(response);
-        if (response.data.data.length === 0) {
-          setHasMore(false);
-        }
-        setData((prevData) => [...prevData, ...response.data.data]);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setIsLoading(false);
+
+  const fetchData = async () => {
+    try {
+      const config = {
+        headers: {
+          projectId: "9m8ybce3f4vg",
+        },
+      };
+      const response = await axios.get(
+        `https://academics.newtonschool.co/api/v1/ott/show?page=${pageNumber}&limit=50`,
+        config
+      );
+      const filtered = response.data.data.filter((item) =>
+        item.keywords.includes(category)
+      );
+      if (filtered) {
+        setData((prevData) => [...prevData, ...filtered]);
+        setPageNumber((prevPage) => prevPage + 1);
       }
-    };
-
-    if (hasMore) {
-      fetchData();
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
     }
-  }, [pageNumber, hasMore]);
+  };
 
+  // useEffect(() => {    //adding duplicate data
+  //   fetchData();
+  //   setPageNumber((prevPage) => prevPage + 1);
+  // }, []);
+
+  if(data.length <= 10) {
+    fetchData();
+  }
   return (
     <>
       <Container>
-        <Title>Popular TV Shows</Title>
+        <Title>{category ? category.toUpperCase() : "Popular TV Shows"}</Title>
 
         {/* Button */}
         <LeftButton
@@ -162,7 +176,51 @@ const TvShows = () => {
             onMouseLeave={() => setIsHovered(false)}
             id="card-scroll-container"
           >
-            {data.map((item) => (
+            {/* {filtered
+              ? filtered.map((item) => (
+                  <StyledLink to={`/show/${item._id}`} key={item._id}>
+                    <Card
+                      sx={{
+                        maxWidth: 345,
+                        borderRadius: 2,
+                        width: "180px",
+                      }}
+                      raised
+                      className="card"
+                    >
+                      <CardMedia
+                        component="img"
+                        alt={item.title}
+                        height="280"
+                        image={item.thumbnail}
+                        sx={{ objectFit: "cover" }}
+                      />
+                    </Card>
+                  </StyledLink>
+                ))
+              : data.map((item) => (
+                  <StyledLink to={`/show/${item._id}`} key={item._id}>
+                    <Card
+                      sx={{
+                        maxWidth: 345,
+                        borderRadius: 2,
+                        width: "180px",
+                      }}
+                      raised
+                      className="card"
+                    >
+                      <CardMedia
+                        component="img"
+                        alt={item.title}
+                        height="280"
+                        image={item.thumbnail}
+                        sx={{ objectFit: "cover" }}
+                      />
+                    </Card>
+                  </StyledLink>
+                ))} */}
+
+            {data?.map((item) => (
               <StyledLink to={`/show/${item._id}`} key={item._id}>
                 <Card
                   sx={{
@@ -200,4 +258,4 @@ const TvShows = () => {
   );
 };
 
-export default TvShows;
+export default FilteredShowList;

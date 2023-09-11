@@ -7,6 +7,9 @@ import { Route, Routes } from "react-router-dom";
 import Registration from "./pages/Registration";
 import { useSelector } from "react-redux";
 import Login from "./pages/Login";
+import Show from "./pages/Show";
+import MyList from "./pages/MyList";
+import Profile from "./pages/Profile";
 
 function App() {
   const token = useSelector((state) => state.user.userToken);
@@ -15,11 +18,11 @@ function App() {
       <ThemeProvider theme={theme}>
         <Routes>
           <Route exact path="/" element={<Home />} />
-          {/* {token ? ( */}
-            <Route path="/login" element={<Login />} />
-          {/* ) : ( */}
-            <Route path="/register" element={<Registration />} />
-          {/* )} */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="/show/:id" element={<Show />} />
+          <Route path="/mylist" element={<MyList />} />
+          <Route path="/profile" element={<Profile />} />
 
           <Route path="/about" element={<About />} />
         </Routes>
