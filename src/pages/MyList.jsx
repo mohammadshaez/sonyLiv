@@ -23,15 +23,13 @@ const CardContainer = styled.div`
   padding: 20px 0;
   display: flex;
   flex-wrap: wrap;
-  /* border: 1px solid white; */
   gap: 15px;
-  /* overflow-x: scroll; */
   .MuiCard-root:hover,
   .MuiCard-root:focus {
-    transform: scale(1.1); /* Scale up the card on hover */
+    transform: scale(1.1); 
     transition: transform 0.5s ease-in-out;
     & > .scroll-button {
-      opacity: 1; /* Make the button visible on hover */
+      opacity: 1;
     }
   }
 `;
@@ -42,9 +40,11 @@ const MyList = () => {
   const userToken = useSelector((state) => state.user.currentUser.token);
   const [list, setList] = useState([]);
   const dispatch = useDispatch();
-  //   console.log("list ", list[0].thumbnail);
-//   list.map(item => dispatch(addToList({id: item._id})))
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // For smooth scrolling behavior
+    });
     const fetchMyList = async () => {
       try {
         const config = {
@@ -60,21 +60,14 @@ const MyList = () => {
         console.log("resp", response.data.data.shows);
         if (response.data.status == "success") {
           setList(response.data.data.shows);
-          //   setIsAddedToList(true);
-          // dispatch(addToList(response.data.data.shows))
         }
       } catch (error) {
         console.log(error);
       }
     };
     fetchMyList();
+    
   }, []);
-
-  // useEffect(() => {
-  //     list?.map((item) => {
-  //     dispatch(addToList({ id: item._id }));
-  //   });
-  // }, [dispatch, list]);
 
   return (
     <>
@@ -82,7 +75,6 @@ const MyList = () => {
       <Container>
         <TitleContainer>
           <h1>My Watchlist</h1>
-          <button onClick={()=> dispatch(resetWatchlist())}>Reset Watchlist</button>
         </TitleContainer>
         <CardContainer ref={containerRef}>
           {list?.map((item) => (

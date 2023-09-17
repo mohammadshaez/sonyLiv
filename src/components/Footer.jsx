@@ -1,4 +1,3 @@
-// import { styled } from "styled-components";
 import { mobile, tablet, large } from "../helper/responsiveHelper";
 import { useMediaQuery } from "react-responsive";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -21,6 +20,10 @@ const Container = styled.div`
   flex-direction: column;
   color: white;
   background-color: #111111;
+  & a {
+    color: lightgray;
+    text-decoration: none;
+  }
 `;
 
 //Mui Accordian
@@ -106,6 +109,7 @@ const SmallDevice = () => {
   };
 
   return (
+   
     <Container>
       <AccordianContainer>
         <Accordion
@@ -259,7 +263,7 @@ const SmallDevice = () => {
         <StyledLink>Privacy Policy</StyledLink>
         <StyledLink>FAQs</StyledLink>
         <StyledLink>Contact Us</StyledLink>
-        <StyledLink>Advetise With Us</StyledLink>
+        <StyledLink>Advertise With Us</StyledLink>
         {/* Copyright */}
         <CopyrightContainer>
           <p>© 2022 Sony Pictures Networks India Pvt. Ltd.</p>
@@ -382,7 +386,7 @@ const LargeDevice = () => {
             <StyledLink>Privacy Policy</StyledLink>
             <StyledLink>FAQs</StyledLink>
             <StyledLink>Contact Us</StyledLink>
-            <StyledLink>Advetise With Us</StyledLink>
+            <StyledLink>Advertise With Us</StyledLink>
             {/* Copyright */}
             <CopyrightContainer>
               <p>© 2022 Sony Pictures Networks India Pvt. Ltd.</p>
@@ -391,8 +395,8 @@ const LargeDevice = () => {
 
           {/* App Download */}
           <MobileStoreContainer>
-            <MobileAppImage src="src/assets/App_Download/playStore.png" />
-            <MobileAppImage src="src/assets/App_Download/appleStore.png" />
+            <MobileAppImage src="/src/assets/App_Download/appleStore.png" />
+            <MobileAppImage src="/src/assets/App_Download/playstore.png" />
           </MobileStoreContainer>
 
           {/* Social Links */}

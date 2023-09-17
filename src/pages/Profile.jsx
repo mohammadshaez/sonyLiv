@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import EditIcon from "@mui/icons-material/Edit";
@@ -169,7 +169,12 @@ const Profile = () => {
     email: user.email,
     "appType": "ott",
   });
-
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // For smooth scrolling behavior
+    });
+  }, [])
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (userDetails.passwordCurrent == userDetails.updatedPassword) {

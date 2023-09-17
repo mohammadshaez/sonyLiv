@@ -152,7 +152,7 @@ const FilteredShowList = ({ category }) => {
   return (
     <>
       <Container>
-        <Title>{category ? category.toUpperCase() : "Popular TV Shows"}</Title>
+        <Title id={category}>{category ? category.toUpperCase() : "Popular TV Shows"}</Title>
 
         {/* Button */}
         <LeftButton

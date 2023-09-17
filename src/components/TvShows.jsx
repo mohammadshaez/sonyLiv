@@ -138,7 +138,7 @@ const TvShows = () => {
   return (
     <>
       <Container>
-        <Title>Popular TV Shows</Title>
+        <Title id="tvShows">Popular TV Shows</Title>
 
         {/* Button */}
         <LeftButton

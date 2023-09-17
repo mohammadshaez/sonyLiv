@@ -86,7 +86,7 @@ const TodaysHotPick = () => {
   return (
     <>
       <Container>
-        <Title>Today's Hot Pick</Title>
+        <Title id="hotPick">Today's Hot Pick</Title>
         <LeftButton
           onClick={() => handleScroll("left")}
           onMouseOver={() => setIsHovered(true)}

@@ -10,6 +10,8 @@ import Login from "./pages/Login";
 import Show from "./pages/Show";
 import MyList from "./pages/MyList";
 import Profile from "./pages/Profile";
+import Subscription from "./pages/Subscription";
+import MaintenancePage from "./pages/Maintainance";
 
 function App() {
   const token = useSelector((state) => state.user.userToken);
@@ -23,6 +25,8 @@ function App() {
           <Route path="/show/:id" element={<Show />} />
           <Route path="/mylist" element={<MyList />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/subscribe" element={<Subscription />} />
+          <Route path="/maintainance" element={<MaintenancePage />} />
 
           <Route path="/about" element={<About />} />
         </Routes>

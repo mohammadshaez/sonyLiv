@@ -10,15 +10,17 @@ import ContactsIcon from "@mui/icons-material/Contacts";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PercentIcon from "@mui/icons-material/Percent";
 import { Link } from "react-router-dom";
+import { Link as LinkScroll} from "react-scroll";
 import { useSelector } from "react-redux";
 
 const Wrapper = styled.header`
   display: flex;
   width: 100%;
-  position: absolute;
+  position: fixed;
   /* top: 0; */
   justify-content: space-between;
   height: 45px;
+  z-index: 2;
 
   ${large({})}
   ${tablet({})}
@@ -49,7 +51,8 @@ const Logo = styled.img`
   margin-right: 10px;
   width: 35px;
 `;
-const SubscribeButton = styled.button`
+const SubscribeButton = styled(Link)`
+  text-decoration: none;
   height: 20px;
   display: flex;
   align-items: center;
@@ -85,7 +88,8 @@ const Center = styled.div`
   ${tablet({})}
   ${mobile({})}
 `;
-const LiElement = styled.li`
+const ScrollLink = styled(LinkScroll)`
+  text-decoration: none;
   height: 100%;
   display: flex;
   flex-shrink: 0;
@@ -173,11 +177,17 @@ const UserDropdownContent = styled(Link)`
 const StyledLink = styled(Link)`
   text-decoration: none;
 `;
-const Navbar = () => {
+const Navbar = ({
+  hotPickRef,
+  tvShowsRef,
+  romanceRef,
+  thrillerRef,
+  fantasyRef,
+  comedyRef,
+  actionRef,
+  sciFiRef,
+}) => {
   const user = useSelector((state) => state.user.currentUser);
-  // useEffect(() => {
-  //   window.scrollTo(0, 0); // Scroll to the top when the component mounts
-  // }, []);
   return (
     <>
       <Wrapper>
@@ -188,24 +198,21 @@ const Navbar = () => {
               <Logo src="https://images.slivcdn.com/UI_icons/sonyliv_new_revised_header_logo.png?w=40&q=high&fr=webp" />
             </Link>
           </LogoWrapper>
-          <SubscribeButton>
+          <SubscribeButton to="/subscribe">
             Subscribe
             <ChevronRightIcon sx={{ fontSize: "1rem" }} />
           </SubscribeButton>
         </Left>
         <Pipe>|</Pipe>
         <Center>
-          <LiElement>KBC</LiElement>
-          <LiElement>US Open</LiElement>
-          <LiElement>Orignals</LiElement>
-          <LiElement>QOTY</LiElement>
-          <LiElement>TV Shows</LiElement>
-          <LiElement>New</LiElement>
-          <LiElement>WWE</LiElement>
-          <LiElement>Sports</LiElement>
-          <LiElement>Movies</LiElement>
-          <LiElement>#WatchFree</LiElement>
-          <LiElement>Premium</LiElement>
+          <ScrollLink to="hotPick" spy={true} smooth={true} duration={500}>Trending</ScrollLink>
+          <ScrollLink to="tvShows" spy={true} smooth={true} duration={500}>TV Shows</ScrollLink>
+          <ScrollLink to="romance" spy={true} smooth={true} duration={500}>Romance</ScrollLink>
+          <ScrollLink to="thriller" spy={true} smooth={true} duration={500}>Thriller</ScrollLink>
+          <ScrollLink to="fantasy" spy={true} smooth={true} duration={500}>Fantasy</ScrollLink>
+          <ScrollLink to="comedy" spy={true} smooth={true} duration={500}>Comedy</ScrollLink>
+          <ScrollLink to="action" spy={true} smooth={true} duration={500}>Action</ScrollLink>
+          <ScrollLink to="sciFi" spy={true} smooth={true} duration={500}>Sci-Fi</ScrollLink>
         </Center>
         <Right>
           <SearchIcon
@@ -229,23 +236,30 @@ const Navbar = () => {
               }}
             />
             <UserDropdownContainer>
-              <UserDropdownContent to="/login">
-                <img
-                  src="src/assets/Misc/UserDropdownSignin.png"
-                  alt="sign in avatar"
-                />
-                {user ? (
+              {user ? (
+                <UserDropdownContent to="/profile">
+                  <img
+                    src="/src/assets/Misc/UserDropdownSignin.png"
+                    alt="sign in avatar"
+                  />
+
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <p>Welcome, {user.name}</p>
+                    <p>Welcome, {user.data.name}</p>
                   </div>
-                ) : (
+                </UserDropdownContent>
+              ) : (
+                <UserDropdownContent to="/login">
+                  <img
+                    src="src/assets/Misc/UserDropdownSignin.png"
+                    alt="sign in avatar"
+                  />
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <p>Sign in</p>
                     <p>a better experience</p>
                   </div>
-                )}
-              </UserDropdownContent>
-              <UserDropdownContent>
+                </UserDropdownContent>
+              )}
+              <UserDropdownContent to="/subscribe">
                 <SubscriptionsIcon />
                 <p>Subscribe Now</p>
               </UserDropdownContent>

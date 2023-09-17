@@ -10,7 +10,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { FaCrown } from "react-icons/fa";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useDispatch, useSelector } from "react-redux";
@@ -122,13 +122,14 @@ const SubscribeContainer = styled.div`
   display: flex;
   align-items: center;
 `;
-const SubscribeButton = styled.button`
+const SubscribeButton = styled(Link)`
+  text-decoration: none;
   background-color: #e1a51a;
   color: white;
-  margin: 10px;
+  cursor: pointer;
   width: 250px;
   height: 40px;
-  padding: 10px;
+  margin: 10px;
   border: none;
   border-radius: 7px;
   display: flex;
@@ -136,6 +137,9 @@ const SubscribeButton = styled.button`
   justify-content: space-around;
   gap: 5px;
   font-size: 15px;
+  &:hover {
+    background-color: #c79216;
+  }
 `;
 const SubscribeInfo = styled.div`
   padding: 0 5px;
@@ -177,7 +181,6 @@ const style = {
 };
 
 const Show = () => {
-  window.scrollTo(0, 0);
   const { id } = useParams();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -199,6 +202,7 @@ const Show = () => {
       // console.log("myWatchlist ", myWatchlist);
       setIsAddedToList(false);
     }
+  window.scrollTo({top: 0, behavior: 'smooth',});
   }, [id]);
 
   // console.log("data : ", data._id);
@@ -344,7 +348,7 @@ const Show = () => {
             </HiddenMoreInfoContainer>
           </MoreInfoContainer>
           <SubscribeContainer>
-            <SubscribeButton>
+            <SubscribeButton to="/subscribe">
               <FaCrown style={{ fontSize: "25px" }} />
               <span>Subscribe Now</span>
             </SubscribeButton>
