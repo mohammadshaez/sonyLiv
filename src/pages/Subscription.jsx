@@ -96,7 +96,7 @@ const Container = styled.div`
       rgba(255, 0, 0, 0),
       rgba(21, 21, 21, 1)
     ),
-    url("src/assets/Misc/movie-list.png");
+    url("/Misc/movie-list.png");
   background-repeat: repeat-x;
   background-size: 60%;
   z-index: 0; /* Place the overlay layer behind the content */

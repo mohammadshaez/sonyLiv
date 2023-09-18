@@ -9,19 +9,17 @@ import Footer from "../components/Footer";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { FaCrown } from "react-icons/fa";
-import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import DoneIcon from "@mui/icons-material/Done";
-import { addToList } from "../redux/myListSlice";
-import { removeFromList } from "../redux/myListSlice";
-
+import { TodaysHotPickData } from "../helper/data";
+import YouTube from "react-youtube";
 const Container = styled.div`
   background-image: linear-gradient(to right, #151515 40%, transparent 60%),
     linear-gradient(to top, #151515 20%, transparent 60%),
-      url(${(props) => props.thumb});
+    url(${(props) => props.thumb});
   background-position: right;
   background-repeat: no-repeat;
   background-size: contain;
@@ -96,7 +94,7 @@ const WrapperDiv = styled.div`
 `;
 const MoreInfoContainer = styled.div`
   width: 50%;
-`;  
+`;
 const TextContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -171,113 +169,38 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 1000,
   bgcolor: "black",
-  // border: "2px solid #000",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
-
-const Show = () => {
+const SyledLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+`;
+const ShowLocalData = () => {
   const { id } = useParams();
+  const data = TodaysHotPickData?.filter((item) => item.id == id);
+  console.log(TodaysHotPickData, id, data);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const { userToken } = useSelector((state) => state.user);
   const [isFullView, setIsFullView] = useState(false);
-  const [data, setData] = useState("");
   const [isAddToList, setIsAddedToList] = useState(false);
-  const dispatch = useDispatch();
-  const { myWatchlist } = useSelector((state) => state.myList);
-  console.log("myWatchlist ", myWatchlist);
-  // Modal
   useEffect(() => {
-    if (myWatchlist.includes(id)) {
-      setIsAddedToList(true);
-    } else {
-      setIsAddedToList(false);
-    }
-  window.scrollTo({top: 0, behavior: 'smooth',});
-  }, [id]);
-
-  // console.log("data : ", data._id);
-  useEffect(() => {
-    const fetchShowData = async () => {
-      try {
-        const config = {
-          headers: {
-            projectId: "9m8ybce3f4vg",
-          },
-        };
-        const response = await axios.get(
-          `https://academics.newtonschool.co/api/v1/ott/show/${id}`,
-          config
-        );
-        // console.log(response.data);
-        if (response.data.status == "success") {
-          setData(response.data.data);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchShowData();
-  }, [id]);
-
-  const handleAddtoMyList = async () => {
-    try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-          projectId: "9m8ybce3f4vg",
-        },
-      };
-      const bodyData = {
-        showId: data._id,
-      };
-      const response = await axios.patch(
-        `https://academics.newtonschool.co/api/v1/ott/watchlist/like`,
-        bodyData,
-        config
-      );
-      console.log("res--> ", response.data.data.shows);
-      if (response.data.status == "success") {
-        setIsAddedToList(!isAddToList);
-        dispatch(addToList(response.data.data.shows));
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+  const opts = {
+    height: "600",
+    width: "100%",
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
   };
-
-  const handleRemoveMyList = async () => {
-    try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-          projectId: "9m8ybce3f4vg",
-        },
-      };
-      const bodyData = {
-        showId: data._id,
-      };
-      const response = await axios.patch(
-        `https://academics.newtonschool.co/api/v1/ott/watchlist/like`,
-        bodyData,
-        config
-      );
-      console.log("res--> ", response.data.data.shows);
-      if (response.data.status == "success") {
-        setIsAddedToList(!isAddToList);
-        dispatch(removeFromList(data._id));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   return (
     <>
       <Navbar />
-      <Container thumb={data.thumbnail}>
+      <Container thumb={data[0].imageURL}>
         <InfoContainer>
           <TitleContainer>
             <img
@@ -286,7 +209,7 @@ const Show = () => {
               width="25px"
               height="25px"
             />
-            <h1>{data.title}</h1>
+            <h1>{data[0].title}</h1>
           </TitleContainer>
           <InfoWrapper>
             <span>English</span>
@@ -294,10 +217,12 @@ const Show = () => {
             <span>U/A 16+</span>
             <span>1 Seasons</span>
             <span>5 Episodes</span>
-            <span>{data.keywords}</span>
+            <span>{data[0].keywords}</span>
           </InfoWrapper>
-          <DescriptionContainer menustatus={isFullView ? isFullView : undefined}>
-            <BodyText>{data.description}</BodyText>
+          <DescriptionContainer
+            menustatus={isFullView ? isFullView : undefined}
+          >
+            <BodyText>{data[0].description}</BodyText>
             <MoreContainer onClick={() => setIsFullView(true)}>
               More
               <KeyboardArrowDownIcon />
@@ -319,19 +244,17 @@ const Show = () => {
             <HiddenMoreInfoContainer menustatus={isFullView}>
               <WrapperDiv>
                 <BodyTextDark>Cast: </BodyTextDark>
-                <BodyText>{data.cast}</BodyText>
+                <BodyText>{data[0].cast}</BodyText>
               </WrapperDiv>
               <WrapperDiv>
                 <BodyTextDark>Director: </BodyTextDark>
-                <BodyText>{data.director}</BodyText>
+                <BodyText>{data[0].director}</BodyText>
               </WrapperDiv>
 
               <TextContainer>
                 <WrapperDiv>
                   <BodyTextDark>Producers: </BodyTextDark>
-                  <BodyText>
-                  {data.director}
-                  </BodyText>
+                  <BodyText>{data[0].producer}</BodyText>
                 </WrapperDiv>
                 <LessContainer onClick={() => setIsFullView(false)}>
                   Less
@@ -354,18 +277,22 @@ const Show = () => {
               <InfoButton>
                 <DoneIcon />
                 {/* <p onClick={()=>dispatch(addToList())}>Added</p> */}
-                <p onClick={handleRemoveMyList}>Added</p>
+                <p>Added</p>
               </InfoButton>
             ) : (
-              <InfoButton onClick={handleAddtoMyList}>
-                <AddIcon />
-                <p>My List</p>
-              </InfoButton>
+              <SyledLink to="/maintainance">
+                <InfoButton>
+                  <AddIcon />
+                  <p>My List</p>
+                </InfoButton>
+              </SyledLink>
             )}
-            <InfoButton>
-              <ShareIcon />
-              <p>Share</p>
-            </InfoButton>
+            <SyledLink to="/maintainance">
+              <InfoButton>
+                <ShareIcon />
+                <p>Share</p>
+              </InfoButton>
+            </SyledLink>
             <InfoButton onClick={handleOpen}>
               <PlayArrowIcon />
               <p>Trailer</p>
@@ -380,10 +307,7 @@ const Show = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <VideoBackground autoPlay loop>
-              <source src={data.video_url} type="video/mp4" />
-              Your browser does not support the video tag.
-            </VideoBackground>
+            <YouTube videoId={data[0].video_url} opts={opts} />
           </Box>
         </Modal>
       </Container>
@@ -393,4 +317,4 @@ const Show = () => {
   );
 };
 
-export default Show;
+export default ShowLocalData;

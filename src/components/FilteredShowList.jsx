@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { mobile, tablet, large } from "../helper/responsiveHelper";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   /* width: 100%; */
@@ -33,12 +34,9 @@ const CardScrollContainer = styled.div`
 
 const CardContainer = styled.div`
   margin: 20px 0;
-  /* position: relative; */
   display: inline-flex;
-  /* border: 1px solid white; */
   gap: 15px;
   cursor: pointer;
-  /* overflow-x: scroll; */
   .MuiCard-root:hover,
   .MuiCard-root:focus {
     transform: scale(1.1); /* Scale up the card on hover */
@@ -85,36 +83,20 @@ const FilteredShowList = ({ category }) => {
   const [pageNumber, setPageNumber] = useState(1);
   // const [hasMore, setHasMore] = useState(true);
   const containerRef = useRef(null);
+  // console.log(data.length, pageNumber);
 
-  // console.log(data);
-  // const filtered = data.filter((item) => item.keywords.includes(category));
-  // console.log(filtered.length);
-  console.log(data.length, pageNumber)
-  // const handleDataCompletion = () => {
-  //   if (data.length > 0 && data.length <= 10) {
-  //   }
-  // };
   const handleScroll = (direction) => {
-    // const container = document.getElementById("card-scroll-container");
-    // const cardWidth = 180;
-    // const cardsInView = Math.floor(container.clientWidth / cardWidth);
-    // const scrollAmount = cardWidth * cardsInView;
-
     if (direction === "left") {
       const container = containerRef.current;
-      // console.log(container);
       const cardWidth = container.querySelector(".card").offsetWidth;
       setScrollLeft(scrollLeft - cardWidth * 5);
     } else {
       const container = containerRef.current;
-      // console.log(container.offsetWidth);
       const cardWidth = container.querySelector(".card").offsetWidth;
-      // console.log(cardWidth);
       setScrollLeft(scrollLeft + cardWidth * 5);
       fetchData();
     }
   };
-
 
   const fetchData = async () => {
     try {
@@ -141,18 +123,15 @@ const FilteredShowList = ({ category }) => {
     }
   };
 
-  // useEffect(() => {    //adding duplicate data
-  //   fetchData();
-  //   setPageNumber((prevPage) => prevPage + 1);
-  // }, []);
-
-  if(data.length <= 10) {
+  if (data.length <= 10) {
     fetchData();
   }
   return (
     <>
       <Container>
-        <Title id={category}>{category ? category.toUpperCase() : "Popular TV Shows"}</Title>
+        <Title id={category}>
+          {category ? category.toUpperCase() : "Popular TV Shows"}
+        </Title>
 
         {/* Button */}
         <LeftButton
@@ -176,50 +155,6 @@ const FilteredShowList = ({ category }) => {
             onMouseLeave={() => setIsHovered(false)}
             id="card-scroll-container"
           >
-            {/* {filtered
-              ? filtered.map((item) => (
-                  <StyledLink to={`/show/${item._id}`} key={item._id}>
-                    <Card
-                      sx={{
-                        maxWidth: 345,
-                        borderRadius: 2,
-                        width: "180px",
-                      }}
-                      raised
-                      className="card"
-                    >
-                      <CardMedia
-                        component="img"
-                        alt={item.title}
-                        height="280"
-                        image={item.thumbnail}
-                        sx={{ objectFit: "cover" }}
-                      />
-                    </Card>
-                  </StyledLink>
-                ))
-              : data.map((item) => (
-                  <StyledLink to={`/show/${item._id}`} key={item._id}>
-                    <Card
-                      sx={{
-                        maxWidth: 345,
-                        borderRadius: 2,
-                        width: "180px",
-                      }}
-                      raised
-                      className="card"
-                    >
-                      <CardMedia
-                        component="img"
-                        alt={item.title}
-                        height="280"
-                        image={item.thumbnail}
-                        sx={{ objectFit: "cover" }}
-                      />
-                    </Card>
-                  </StyledLink>
-                ))} */}
-
             {data?.map((item) => (
               <StyledLink to={`/show/${item._id}`} key={item._id}>
                 <Card

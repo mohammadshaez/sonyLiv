@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
 // import { login } from "../redux/apiCalls";
@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { loginFailed, loginStart, loginSuccess } from "../redux/userSlice";
+import { addToken, loginFailed, loginStart, loginSuccess } from "../redux/userSlice";
 const Container = styled.div`
   width: 100%;
   height: 100vh;
@@ -92,6 +92,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { error, userToken, currentUser } = useSelector((state) => state.user);
+  useEffect(()=>window.scrollTo({top: 0, behavior: 'smooth',}),[])
   const handleClick = async (e) => {
       e.preventDefault();
       const userData = {
@@ -112,12 +113,13 @@ const Login = () => {
         userData,
         config
         );
-        console.log(response); 
+        console.log(response.data.token); 
         if (response.data.status == "success") {
             navigate("/");
         }
         dispatch(loginSuccess(response.data));
-        console.log(error, userToken, currentUser);
+        dispatch(addToken(response.data.token))
+        // console.log(error, userToken, currentUser);
     } catch (error) {
       console.log(error);
       dispatch(loginFailed());

@@ -137,7 +137,9 @@ const Right = styled.div`
   align-items: center;
   gap: 10px;
 `;
-
+const SmallImage = styled.img`
+  
+`
 const Slider = () => {
   const [sliderindex, setsliderindex] = useState(0);
   //touch
@@ -186,7 +188,7 @@ const Slider = () => {
               <HeroImage src={item.imageURL} />
             </ImageContainer>
             <DetailsWrapper>
-              <UpperWrapper>
+              {/* <UpperWrapper>
                 <Details> {item.details} </Details>
                 <Dot>•</Dot>
                 <Language> {item.language} </Language>
@@ -205,7 +207,8 @@ const Slider = () => {
                   <ReplyIcon />
                   <Title>Share</Title>
                 </Right>
-              </BottomWrapper>
+              </BottomWrapper> */}
+              <SmallImage src={item.smImg} />
             </DetailsWrapper>
           </Container>
         ))}

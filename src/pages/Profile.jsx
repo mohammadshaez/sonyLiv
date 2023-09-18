@@ -8,8 +8,11 @@ import { AiOutlineRight } from "react-icons/ai";
 import PaidIcon from "@mui/icons-material/Paid";
 import ImportantDevicesIcon from "@mui/icons-material/ImportantDevices";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { logout } from "../redux/userSlice";
+import { useNavigate } from "react-router-dom";
+
 const Container = styled.div`
   max-width: 500px;
   margin: 0 auto;
@@ -160,6 +163,8 @@ const Profile = () => {
   const user = useSelector((state) => state.user.currentUser.data);
   const userToken = useSelector(state => state.user.currentUser.token);
   console.log(userToken)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [error, setError] = useState(false);    
   const [userDetails, setUserDetails] = useState({
     name: "",
@@ -204,6 +209,11 @@ const Profile = () => {
       }
     }
   };
+
+  const handleLogout = () => {
+    dispatch(logout())
+    navigate("/")
+  }
 
 //   console.log(userDetails);
   return (
@@ -300,7 +310,7 @@ const Profile = () => {
               <ImportantDevicesIcon />
               <span>Device Management</span>
             </BottomDiv>
-            <BottomDiv>
+            <BottomDiv onClick={handleLogout}>
               <LogoutIcon />
               <span>Sign Out</span>
             </BottomDiv>

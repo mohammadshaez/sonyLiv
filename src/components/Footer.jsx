@@ -241,8 +241,8 @@ const SmallDevice = () => {
 
       {/* App Download */}
       <MobileStoreContainer>
-        <MobileAppImage src="src/assets/App_Download/playStore.png" />
-        <MobileAppImage src="src/assets/App_Download/appleStore.png" />
+        <MobileAppImage src="/App_Download/playStore.png" />
+        <MobileAppImage src="/App_Download/appleStore.png" />
       </MobileStoreContainer>
 
       {/* Social Links */}
@@ -395,8 +395,8 @@ const LargeDevice = () => {
 
           {/* App Download */}
           <MobileStoreContainer>
-            <MobileAppImage src="/src/assets/App_Download/appleStore.png" />
-            <MobileAppImage src="/src/assets/App_Download/playstore.png" />
+            <MobileAppImage src="/App_Download/appleStore.png" />
+            <MobileAppImage src="/App_Download/playstore.png" />
           </MobileStoreContainer>
 
           {/* Social Links */}

@@ -1,5 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import Navbar from "../components/Navbar";
 
 const Container = styled.div`
   display: flex;
@@ -16,13 +17,16 @@ const MaintenanceText = styled.h1`
 
 const MaintenancePage = () => {
   return (
-    <Container>
-      <MaintenanceText>
-        We're currently undergoing maintenance.
-        <br />
-        Please check back later!
-      </MaintenanceText>
-    </Container>
+    <>
+      <Navbar />
+      <Container>
+        <MaintenanceText>
+          We're currently undergoing maintenance.
+          <br />
+          Please check back later!
+        </MaintenanceText>
+      </Container>
+    </>
   );
 };
 

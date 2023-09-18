@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
 import Slider from "../components/Slider";
 import TodaysHotPick from "../components/TodaysHotPick";
@@ -8,7 +8,9 @@ import { useSelector } from "react-redux";
 import FilteredShowList from "../components/FilteredShowList";
 
 const Home = () => {
-  const { currentUser } = useSelector((state) => state.user);
+  // const { currentUser } = useSelector((state) => state.user);
+  useEffect(()=>window.scrollTo({top: 0, behavior: 'smooth',}),[])
+  
   // console.log("User From Homepage : ",currentUser)
   const hotPickRef = useRef(null);
   const tvShowsRef = useRef(null);

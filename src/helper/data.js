@@ -1,71 +1,81 @@
 export const sliderData = [
   {
     id: 0,
-    imageURL: "src/assets/SliderImages/0.webp",
+    imageURL: "/SliderImages/0.webp",
     details: ["Biography, Crime, Drama"],
     language: "Hindi",
     releaseYear: 2023,
+    smImg: "/SliderImages/sm0.webp",
   },
   {
     id: 1,
-    imageURL: "src/assets/SliderImages/1.webp",
+    imageURL: "/SliderImages/1.webp",
     details: ["Football"],
     language: "English",
     releaseYear: 2023,
+    smImg: "/SliderImages/sm1.webp",
   },
   {
     id: 2,
-    imageURL: "src/assets/SliderImages/2.jpg",
+    imageURL: "/SliderImages/2.jpg",
     details: ["Cricket"],
     language: "English",
     releaseYear: 2023,
+    smImg: "/SliderImages/sm2.webp",
   },
   {
     id: 3,
     details: ["Tennis"],
-    imageURL: "src/assets/SliderImages/3.webp",
+    imageURL: "/SliderImages/3.webp",
     language: "English",
     releaseYear: 2023,
+    smImg: "/SliderImages/sm3.webp",
   },
   {
     id: 4,
-    imageURL: "src/assets/SliderImages/4.webp",
+    imageURL: "/SliderImages/4.webp",
     details: ["Reality"],
     language: "Hindi",
     releaseYear: 2009,
+    smImg: "/SliderImages/sm4.webp",
   },
   {
     id: 5,
-    imageURL: "src/assets/SliderImages/5.webp",
+    imageURL: "/SliderImages/5.webp",
     details: ["Reality, Dance"],
     language: "Hindi",
     releaseYear: 2023,
+    smImg: "/SliderImages/sm5.webp",
   },
   {
     id: 6,
-    imageURL: "src/assets/SliderImages/6.webp",
+    imageURL: "/SliderImages/6.webp",
     details: ["Game show"],
     language: "Hindi",
+    smImg: "/SliderImages/sm6.webp",
     releaseYear: 2023,
   },
   {
     id: 7,
-    imageURL: "src/assets/SliderImages/7.webp",
+    imageURL: "/SliderImages/7.webp",
     details: ["Drama"],
+    smImg: "/SliderImages/sm7.webp",
     language: "Bengali",
     releaseYear: 2023,
   },
   {
     id: 8,
-    imageURL: "src/assets/SliderImages/8.jpg",
+    imageURL: "/SliderImages/8.jpg",
+    smImg: "/SliderImages/sm8.webp",
     details: ["Thriller, Crime"],
     language: "Hindi",
     releaseYear: 2023,
   },
   {
     id: 9,
-    imageURL: "src/assets/SliderImages/9.webp",
+    imageURL: "/SliderImages/9.webp",
     details: ["Fight Sports"],
+    smImg: "/SliderImages/sm9.webp",
     language: "English",
     releaseYear: 2023,
   },
@@ -75,42 +85,112 @@ export const sliderData = [
 export const TodaysHotPickData = [
   {
     id: 1,
-    imageURL: "src/assets/Todays_Hot_Pick/1.webp"
+    imageURL: "/Todays_Hot_Pick/1.webp",
+    title: "Scam 2003",
+    keywords: "Thriller, Mystery",
+    description: "Scam 2003' is based on true events and traces Abdul Karim Telgi's rise from fruit seller to the kingpin of the stamp paper scam. Fueled by greed, Telgi dominates the stamp paper market through corruption, while carefully maintaining a low profile. But for how long can he evade the clutches of the law? The biographical financial thriller is helmed by Hansal Mehta and stars Gagan Dev Riar in the titular role. Watch Volume 1 now. Volume 2 - all episodes streaming this November.",
+    cast: "Gagan Dev Riar, Mukesh Tiwari, Sana Amin Sheikh, Bharat Jadhav, Shaad Randhawa",
+    director: "Tushar Hiranandani",
+    producer: "Sameer Nair, Deepak Segal, Indranil Chakraborty",
+    video_url:"JrotIxxCXiA"
   },
   {
     id: 2,
-    imageURL: "src/assets/Todays_Hot_Pick/2.webp"
+    imageURL: "/Todays_Hot_Pick/2.webp",
+    title: "Journey Of Love 18 + (Hindi)",
+    keywords: "Drama, Rom Com",
+    description: "Set in the backdrop of a remote village in North Kerala, teenage sweethearts navigate love while honoring family traditions and expectations. As they cope with the several shades of grey in their relationship, they forge unique paths to realize their dreams and drives. 'Journey of Love 18+' stars Nalsen, Mathew, Meenakshi, Nikhila Vimal, Rajesh Madhavan and Binu Pappu.",
+    cast: "Nalsen, Mathew, Meenakshi, Nikhila Vimal, Rajesh Madhavan, Binu Pappu, Safwan, Anshid, Manoj K.U., Shyam Mohan, Priya, Kumar Sunil, Nidhinya, Babu Annur, Dhanus, Aneesh, Sakeer Husain",
+    director: "Arun D Jose",
+    producer: "Anumod Bose, Manoj Menon, Dr Gini Gopinath, G. Prajith",
+    video_url:"9EoYeawpQFc"
   },
   {
     id: 3,
-    imageURL: "src/assets/Todays_Hot_Pick/3.webp"
+    imageURL: "/Todays_Hot_Pick/3.webp",
+    title: "India’s Got Talent",
+    keywords: "Reality",
+    description: "India's favourite talent show comes back with another extraordinary new season, where dreams meet the spotlight. This new season unveils exceptional talent, passion, and perseverance. 'India's Got Talent' celebrates the diverse tapestry of remarkable ingenuity. The participants unleash their unrivaled skills to impress the judges - Kirron Kher, Shilpa Shetty Kundra, Badshah and Arjun Bijlani.",
+    cast: "Kirron Kher, Shilpa Shetty Kundra, Badshah, Arjun Bijlani",
+    director: "Chitra Langeh, Huzefa Qaiser",
+    producer: "Fremantle India Television Productions Pvt. Ltd.",
+    video_url:"F_WsAUI4zYw"
   },
   {
     id: 4,
-    imageURL: "src/assets/Todays_Hot_Pick/4.webp"
+    imageURL: "/Todays_Hot_Pick/4.webp",
+    title: "India's Best Dancer",
+    keywords: "Dance, Reality",
+    description: "After 2 successful seasons, India's Best Dancer is back with Season 3. Host Jay Bhanushali and judges Sonali Bendre, Terrence Lewis and Geeta Kapur, aka Geeta Maa, are on the hunt for the nation's most versatile dancer. Be it hip hop, contemporary, jazz and ballet or Indian classical, folk, Odissi and Bharatnatyam - the stage is set for all.",
+    producer: "Malaika Arora",
+    cast: "Geeta Kapoor",
+    director: "Terence Lewis",
+    video_url:"010ZiIgA8oA"
   },
   {
     id: 5,
-    imageURL: "src/assets/Todays_Hot_Pick/5.webp"
+    imageURL: "/Todays_Hot_Pick/5.webp",
+    title: "Kaun Banega Crorepati",
+    keywords: "Game show",
+    description: "India's longest-running knowledge-based show is back with Season 15. Amitabh Bachchan, the legend himself, hosts 'Kaun Banega Crorepati', where India's sharpest minds strive to claim the INR 7 crore fortune by cracking questions and showcasing their brilliance. Tune in, tackle questions with the KBC Play Along – and you too can stand a chance to win the dazzling jackpot!",
+    producer: "Studio Next",
+    cast: "Amitabh Bachchan",
+    director: "Arun Sheshkumar",
+    video_url:"1nr3Dscpt2E"
   },
   {
     id: 6,
-    imageURL: "src/assets/Todays_Hot_Pick/6.webp"
+    imageURL: "/Todays_Hot_Pick/6.webp",
+    title: "Scam 1992 The Harshad Mehta Story",
+    keywords: "Thriller, Based on True Events, Biopic",
+    description: "‘Scam’ is about the major scandals that shook India and are remembered as some of the most notorious crimes of the country. Set in 1980’s and 90’s Bombay, Scam 1992 follows the life of Harshad Mehta - the infamous “Bachchan of BSE”. It was a rags-to-riches story till financial journalist Sucheta Dalal exposed Harshad as the man behind India’s biggest financial scam. After his arrest, the stock market crashed and countless Indians lost all savings. For the first time, the CBI was compelled to launch an investigation into a financial crime. A corrupt financial system was revealed. Harshad eventually died in custody.",
+    producer: "Sameer Nair, Deepak Segal, Indranil Chakraborty",
+    cast: "Pratik Gandhi, Shreya Dhanwanthary, Sharib Hashmi, Hemant Kher, Chirag Vohra, Faisal Rashid, Nikhil Dwivedi, Satish Kaushik, Jay Upadhyay, Rajat Kapoor, Anant Mahadevan",
+    director: "Hansal Mehta",
+    video_url:"ISORfez27og"
   },
   {
     id: 7,
-    imageURL: "src/assets/Todays_Hot_Pick/7.webp"
+    imageURL: "/Todays_Hot_Pick/7.webp",
+    title: "Por Thozhil (Tamil)",
+    keywords: "Thriller, Crime",
+    description: "The blockbuster movie starring Sarath Kumar, Ashok Selvan and Nikhila Vimal has received solid critical acclaim as one of the best thrillers to have come out in Tamil cinema. An academically bright but faint-hearted rookie cop needs to man-up and overcome his fears in order to succeed in his very first assignment - team up with a hostile and reclusive senior cop to catch a serial killer on the loose.",
+    producer: "Sameer Nair, Deepak Segal, Mukesh R. Mehta, C.V. Sarathi, Poonam Mehra, Sandeep Mehra",
+    cast: "Ashok Selvan, Sarath Kumar, Nikhila Vimal",
+    director: "Vignesh Raja",
+    video_url:"wERsNvDbjI"
   },
   {
     id: 8,
-    imageURL: "src/assets/Todays_Hot_Pick/8.webp"
+    imageURL: "/Todays_Hot_Pick/8.webp",
+    title: " WWE RAW",
+    keywords: "WWE, English",
+    description: "Catch all the action from the WWE RAW right here, only on Sony LIV.",
+    producer: "SonyLiv",
+    cast: "SonyLiv",
+    director: "SonyLiv",
+    video_url:"sgKNVUPvB5I"
   },
   {
     id: 9,
-    imageURL: "src/assets/Todays_Hot_Pick/9.webp"
+    imageURL: "/Todays_Hot_Pick/9.webp",
+    title: "College Romance (Hindi)",
+    keywords: "Comedy, Drama, Romance",
+    description: "It's the final year! Madness and mayhem ensue as the seniors prepare to step out into the real world. While they spend time on movie nights, trips, hanging out, job interviews and final farewells, they must confront their anxieties and insecurities to forge their own paths in life. Will they stumble and fall or eventually stand tall? The final season of 'College Romance' stars Apoorva Arora, Gagan Arora, Keshav Sadhna, Shreya Mehta, Nupur Nagpal, Manjot Singh, Eklavey Kashyap and Jhanvi Rawat.",
+    producer: "Arunabh Kumar",
+    cast: "Apoorva Arora, Gagan Arora, Keshav Sadhna, Shreya Mehta, Nupur Nagpal, Manjot Singh, Eklavey Kashyap, Jhanvi Rawat",
+    director: "Ashutosh Pankaj",
+    video_url:"zwRhlzrJGxo"
   },
   {
     id: 10,
-    imageURL: "src/assets/Todays_Hot_Pick/10.webp"
+    imageURL: "/Todays_Hot_Pick/10.webp",
+    title: "Gullak",
+    keywords: "Comedy, Drama, Family",
+    description: "It's the same tune, the same melody. The same soap, the same lather. Welcome back to the same world, where the middle-class has made up its mind that accepting change is futile. Watch Season 3 of our beloved Mishra family spilling out heart-warming stories from their Gullak.",
+    producer: "Palash Vaswani",
+    cast: "Jameel Khan, Geetanjali Kulkarni, Vaibhav Raj Gupta, Harsh Mayar, Sunita Rajwar",
+    director: "Palash Vaswani",
+    video_url:"XKVYXYuPUm8"
   },
 ]

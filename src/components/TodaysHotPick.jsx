@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { TodaysHotPickData } from "../helper/data";
+import { Link } from "react-router-dom";
 const Container = styled.div`
   /* width: 100%; */
   padding: 40px 0;
@@ -63,10 +64,13 @@ const LeftButton = styled(Button)`
 const RightButton = styled(Button)`
   right: 0px;
 `;
-
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
 const TodaysHotPick = () => {
   const [scrollLeft, setScrollLeft] = React.useState(0);
   const [isHovered, setIsHovered] = React.useState(false);
+  const items = TodaysHotPickData;
   const handleScroll = (direction) => {
     const container = document.getElementById("card-scroll-container");
     const scrollAmount = container.clientWidth;
@@ -100,24 +104,31 @@ const TodaysHotPick = () => {
             style={{
               transform: `translateX(-${scrollLeft}px)`,
               transition: "all 0.5s ease",
+              marginLeft: "50px"
             }}
             onMouseOver={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
             {TodaysHotPickData.map((item) => (
-              <Card
-                sx={{ maxWidth: 345, borderRadius: 2, width: "180px", "&:first-of-type": { marginLeft: "50px" } }}
-                raised
-                key={item.id}
-              >
-                <CardMedia
-                  component="img"
-                  alt="green iguana"
-                  height="280"
-                  image={item.imageURL}
-                  sx={{ objectFit: "cover" }}
-                />
-              </Card>
+              <StyledLink to={`/showLocal/${item.id}`}>
+                <Card
+                  sx={{
+                    maxWidth: 345,
+                    borderRadius: 2,
+                    width: "180px",
+                  }}
+                  raised
+                  key={item.id}
+                >
+                  <CardMedia
+                    component="img"
+                    alt="green iguana"
+                    height="280"
+                    image={item.imageURL}
+                    sx={{ objectFit: "cover" }}
+                  />
+                </Card>
+              </StyledLink>
             ))}
           </CardContainer>
         </CardScrollContainer>

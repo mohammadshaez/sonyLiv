@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { mobile, tablet, large } from "../helper/responsiveHelper";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   /* width: 100%; */

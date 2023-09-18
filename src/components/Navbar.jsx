@@ -10,7 +10,7 @@ import ContactsIcon from "@mui/icons-material/Contacts";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PercentIcon from "@mui/icons-material/Percent";
 import { Link } from "react-router-dom";
-import { Link as LinkScroll} from "react-scroll";
+import { Link as LinkScroll } from "react-scroll";
 import { useSelector } from "react-redux";
 
 const Wrapper = styled.header`
@@ -205,25 +205,43 @@ const Navbar = ({
         </Left>
         <Pipe>|</Pipe>
         <Center>
-          <ScrollLink to="hotPick" spy={true} smooth={true} duration={500}>Trending</ScrollLink>
-          <ScrollLink to="tvShows" spy={true} smooth={true} duration={500}>TV Shows</ScrollLink>
-          <ScrollLink to="romance" spy={true} smooth={true} duration={500}>Romance</ScrollLink>
-          <ScrollLink to="thriller" spy={true} smooth={true} duration={500}>Thriller</ScrollLink>
-          <ScrollLink to="fantasy" spy={true} smooth={true} duration={500}>Fantasy</ScrollLink>
-          <ScrollLink to="comedy" spy={true} smooth={true} duration={500}>Comedy</ScrollLink>
-          <ScrollLink to="action" spy={true} smooth={true} duration={500}>Action</ScrollLink>
-          <ScrollLink to="sciFi" spy={true} smooth={true} duration={500}>Sci-Fi</ScrollLink>
+          <ScrollLink to="hotPick" spy={true} smooth={true} duration={500}>
+            Trending
+          </ScrollLink>
+          <ScrollLink to="tvShows" spy={true} smooth={true} duration={500}>
+            TV Shows
+          </ScrollLink>
+          <ScrollLink to="romance" spy={true} smooth={true} duration={500}>
+            Romance
+          </ScrollLink>
+          <ScrollLink to="thriller" spy={true} smooth={true} duration={500}>
+            Thriller
+          </ScrollLink>
+          <ScrollLink to="fantasy" spy={true} smooth={true} duration={500}>
+            Fantasy
+          </ScrollLink>
+          <ScrollLink to="comedy" spy={true} smooth={true} duration={500}>
+            Comedy
+          </ScrollLink>
+          <ScrollLink to="action" spy={true} smooth={true} duration={500}>
+            Action
+          </ScrollLink>
+          <ScrollLink to="sciFi" spy={true} smooth={true} duration={500}>
+            Sci-Fi
+          </ScrollLink>
         </Center>
         <Right>
-          <SearchIcon
-            sx={{
-              fontSize: "2rem",
-              color: "lightgray",
-              fontWeight: "light",
-              cursor: "pointer",
-              padding: "0 10px",
-            }}
-          />
+          <StyledLink to="/search">
+            <SearchIcon
+              sx={{
+                fontSize: "2rem",
+                color: "lightgray",
+                fontWeight: "light",
+                cursor: "pointer",
+                padding: "0 10px",
+              }}
+            />
+          </StyledLink>
           <AccountBoxIconContainer>
             <AccountBoxIcon
               sx={{
@@ -239,7 +257,7 @@ const Navbar = ({
               {user ? (
                 <UserDropdownContent to="/profile">
                   <img
-                    src="/src/assets/Misc/UserDropdownSignin.png"
+                    src="/Misc/UserDropdownSignin.png"
                     alt="sign in avatar"
                   />
 
@@ -250,7 +268,7 @@ const Navbar = ({
               ) : (
                 <UserDropdownContent to="/login">
                   <img
-                    src="src/assets/Misc/UserDropdownSignin.png"
+                    src="/Misc/UserDropdownSignin.png"
                     alt="sign in avatar"
                   />
                   <div style={{ display: "flex", flexDirection: "column" }}>
